@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services | Start Right UK</title>
+  <meta name="description" content="68 UK government services explained simply. Business formation, benefits support, housing help, tax guidance, and more.">
+  <link rel="icon" href="/charlie.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a1628;
+      --bg-light: #f8f6f1;
+      --navy: #1e3a5f;
+      --navy-light: #2d4a6f;
+      --gold: #d4a853;
+      --gold-light: #e8c478;
+      --cream: #fdfbf7;
+      --text-dark: #1a1a2e;
+      --text-light: #f8fafc;
+      --text-muted: #64748b;
+      --success: #10b981;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.12);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+      --radius: 16px;
+      --radius-lg: 24px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--navy) 100%);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      text-decoration: none;
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .logo-text span { color: var(--gold); }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .header-nav a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .header-nav a:hover { color: white; }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg-dark);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--navy) 100%);
+      padding: 140px 40px 80px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span { color: var(--gold); }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    /* Search Bar */
+    .search-container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .search-bar {
+      display: flex;
+      background: white;
+      border-radius: 50px;
+      padding: 6px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .search-bar input {
+      flex: 1;
+      border: none;
+      padding: 14px 24px;
+      font-size: 16px;
+      background: transparent;
+      outline: none;
+    }
+
+    .search-bar button {
+      background: var(--gold);
+      border: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--bg-dark);
+    }
+
+    /* Category Filter */
+    .category-filter {
+      padding: 40px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 64px;
+      z-index: 100;
+    }
+
+    .filter-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      background: var(--bg-light);
+      border: 2px solid transparent;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-dark);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--navy);
+    }
+
+    .filter-btn.active {
+      background: var(--navy);
+      color: white;
+    }
+
+    .filter-btn .count {
+      background: rgba(0,0,0,0.1);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+
+    .filter-btn.active .count {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* Services Grid */
+    .services-section {
+      padding: 60px 40px;
+    }
+
+    .services-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .category-section {
+      margin-bottom: 60px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .category-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .category-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--gold);
+    }
+
+    .category-header h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .category-header .count {
+      background: var(--bg-light);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: var(--gold);
+    }
+
+    .service-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .service-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .service-card .arrow {
+      display: inline-block;
+      margin-top: 12px;
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    /* CTA */
+    .cta {
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--navy) 100%);
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 32px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-dark);
+      padding: 40px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    footer p {
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* Mobile */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .header-nav { display: none; }
+      .hero { padding: 120px 20px 60px; }
+      .hero h1 { font-size: 2rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .category-filter { padding: 20px; }
+      .filter-container { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 10px; }
+      .filter-btn { white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">
+        <span class="logo-text">Start <span>Right</span>®</span>
+      </a>
+      <nav class="header-nav">
+        <a href="/">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/prices.html">Prices</a>
+        <a href="/university.html">University</a>
+        <a href="/about.html">About</a>
+        <a href="/chat.html" class="btn-primary">Chat with Charlie</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1><span>68</span> Services, Explained Simply</h1>
+    <p>From starting a business to claiming benefits, we guide you through every step in plain English.</p>
+    <div class="search-container">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search services...">
+        <button onclick="filterServices()">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Filter -->
+  <section class="category-filter">
+    <div class="filter-container">
+      <button class="filter-btn active" onclick="showCategory('all', this)">All<span class="count">68</span></button>
+      <button class="filter-btn" onclick="showCategory('business', this)">Business<span class="count">15</span></button>
+      <button class="filter-btn" onclick="showCategory('benefits', this)">Benefits<span class="count">15</span></button>
+      <button class="filter-btn" onclick="showCategory('housing', this)">Housing<span class="count">10</span></button>
+      <button class="filter-btn" onclick="showCategory('tax', this)">HMRC & Tax<span class="count">8</span></button>
+      <button class="filter-btn" onclick="showCategory('student', this)">Student Finance<span class="count">6</span></button>
+      <button class="filter-btn" onclick="showCategory('dvla', this)">DVLA & Transport<span class="count">5</span></button>
+      <button class="filter-btn" onclick="showCategory('work', this)">Work & Employment<span class="count">5</span></button>
+      <button class="filter-btn" onclick="showCategory('other', this)">Identity & Other<span class="count">4</span></button>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services-section">
+    <div class="services-container">
+
+      <!-- Business Services -->
+      <div class="category-section" id="business" data-category="business">
+        <div class="category-header">
+          <div class="category-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+          </div>
+          <h2>Business Formation</h2>
+          <span class="count">15 services</span>
+        </div>
+        <div class="services-grid">
+          <a href="/chat.html" class="service-card"><h3>Choose the right business type</h3><p>Sole trader vs LTD vs LLP vs partnership, in plain English.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Register as a sole trader (HMRC)</h3><p>How to register, what you need, and what happens next.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Set up a limited company</h3><p>Company name, SIC, PSC, director/shareholder basics.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Set up an LLP</h3><p>Who it's for, pros/cons, and how registration works.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Set up a partnership</h3><p>When a partnership makes sense and how HMRC sees it.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Business name checks</h3><p>Avoid common mistakes, domains, and clarity.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>SIC codes explained</h3><p>Choosing and updating SIC codes properly.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Registered office address</h3><p>Privacy, mail handling, what's public, and options.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Director duties</h3><p>What you must do and what to avoid.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Shareholders & shares</h3><p>Ownership, share splits, and what it affects.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Business bank account</h3><p>What banks typically ask for and how to prepare.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Invoices & receipts setup</h3><p>Simple templates and what to keep for records.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Business insurance basics</h3><p>Public liability, professional indemnity, employers' liability.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Hiring staff vs subcontractors</h3><p>Simple differences and key red flags.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Business compliance checklist</h3><p>A clean 'what to do next' list after you register.</p><span class="arrow">Ask Charlie →</span></a>
+        </div>
+      </div>
+
+      <!-- Benefits Services -->
+      <div class="category-section" id="benefits" data-category="benefits">
+        <div class="category-header">
+          <div class="category-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+          </div>
+          <h2>Benefits Support</h2>
+          <span class="count">15 services</span>
+        </div>
+        <div class="services-grid">
+          <a href="/chat.html" class="service-card"><h3>Universal Credit overview</h3><p>Eligibility, how it's paid, and common pitfalls.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>UC — starting a claim</h3><p>What you need, how the journal works, timelines.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>UC — evidence & documents</h3><p>What to upload, how to label it, how to follow up.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>UC — changes of circumstances</h3><p>Work, housing, relationships, health, and reporting.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>UC — sanctions & challenges</h3><p>What sanctions are and what to do quickly.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>UC — advance payments</h3><p>Pros/cons, repayment, and when to request.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>UC — housing element</h3><p>Rent, LHA, evidence, and landlord details.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>PIP overview</h3><p>Daily living & mobility activities, reliability rules.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>PIP — preparing your form</h3><p>How to describe a typical day and support needs.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>PIP — assessment prep</h3><p>What to expect, reasonable adjustments, notes.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>PIP — Mandatory Reconsideration</h3><p>Deadlines, structure, and evidence checklist.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>PIP — appeal basics</h3><p>Tribunal steps, what evidence helps, what to say.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>ESA overview</h3><p>New Style ESA basics and health-related support.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Carer's Allowance</h3><p>Eligibility, earnings limits, and overlaps.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Council Tax Reduction</h3><p>What it is, how to apply, and common evidence.</p><span class="arrow">Ask Charlie →</span></a>
+        </div>
+      </div>
+
+      <!-- Housing Services -->
+      <div class="category-section" id="housing" data-category="housing">
+        <div class="category-header">
+          <div class="category-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+          </div>
+          <h2>Housing Help</h2>
+          <span class="count">10 services</span>
+        </div>
+        <div class="services-grid">
+          <a href="/chat.html" class="service-card"><h3>Homelessness help</h3><p>What the council must do and how to approach it.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Housing register / bidding</h3><p>How it works, bands, and increasing your chances.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Medical priority & evidence</h3><p>How to present health impact and supporting letters.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Reasonable adjustments</h3><p>Accessibility needs for housing processes and visits.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Neighbour disputes</h3><p>Recording incidents, escalation, and safer options.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Repairs & disrepair</h3><p>How to write it and what evidence to keep.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Private renting basics</h3><p>Deposits, contracts, rent increases, and repairs.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Eviction basics</h3><p>Main notice types, timeframes, what to do next.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Home swap / mutual exchange</h3><p>How it works, risks, and documentation.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Temporary accommodation</h3><p>What to report, how to escalate, and evidence.</p><span class="arrow">Ask Charlie →</span></a>
+        </div>
+      </div>
+
+      <!-- HMRC & Tax Services -->
+      <div class="category-section" id="tax" data-category="tax">
+        <div class="category-header">
+          <div class="category-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          </div>
+          <h2>HMRC & Tax</h2>
+          <span class="count">8 services</span>
+        </div>
+        <div class="services-grid">
+          <a href="/chat.html" class="service-card"><h3>Self Assessment overview</h3><p>Who needs it, deadlines, and what you report.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Registering for Self Assessment</h3><p>When and how to register, common timing mistakes.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Tax codes explained</h3><p>How tax codes work and what to do if wrong.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>National Insurance basics</h3><p>Class types explained simply, who pays what.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Keeping records</h3><p>What to keep, how long, and easy storage methods.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>VAT basics & thresholds</h3><p>What VAT is, when it applies, and what to watch.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>HMRC letters & responses</h3><p>How to read the letter and reply calmly and clearly.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Refunds & overpayments</h3><p>What to check and what information to gather.</p><span class="arrow">Ask Charlie →</span></a>
+        </div>
+      </div>
+
+      <!-- Student Finance Services -->
+      <div class="category-section" id="student" data-category="student">
+        <div class="category-header">
+          <div class="category-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+          </div>
+          <h2>Student Finance</h2>
+          <span class="count">6 services</span>
+        </div>
+        <div class="services-grid">
+          <a href="/chat.html" class="service-card"><h3>Student Finance overview</h3><p>Tuition, maintenance, how repayments work (simple).</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Applying step-by-step</h3><p>What you need and common proof issues.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Disabled Students' Allowance</h3><p>What it covers and how assessments usually work.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Evidence for DSA</h3><p>How to present needs, letters, and impact.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Changing course / repeating</h3><p>What it can mean for funding and what to check.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Problems & escalation</h3><p>What to do if stuck, delays, or missing payments.</p><span class="arrow">Ask Charlie →</span></a>
+        </div>
+      </div>
+
+      <!-- DVLA & Transport Services -->
+      <div class="category-section" id="dvla" data-category="dvla">
+        <div class="category-header">
+          <div class="category-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+          </div>
+          <h2>DVLA & Transport</h2>
+          <span class="count">5 services</span>
+        </div>
+        <div class="services-grid">
+          <a href="/chat.html" class="service-card"><h3>Driving licence basics</h3><p>Updating details, replacing, and common errors.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Vehicle tax & SORN</h3><p>What it means and how to avoid penalties.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Blue Badge basics</h3><p>Eligibility overview and practical usage tips.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>TfL Congestion Charge</h3><p>General steps to apply and what evidence is typical.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Penalty charge challenges</h3><p>Common grounds, evidence, and calm wording.</p><span class="arrow">Ask Charlie →</span></a>
+        </div>
+      </div>
+
+      <!-- Work & Employment Services -->
+      <div class="category-section" id="work" data-category="work">
+        <div class="category-header">
+          <div class="category-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          </div>
+          <h2>Work & Employment</h2>
+          <span class="count">5 services</span>
+        </div>
+        <div class="services-grid">
+          <a href="/chat.html" class="service-card"><h3>Employment status basics</h3><p>Employee vs worker vs self-employed (simple).</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Sick pay basics (SSP)</h3><p>What SSP is and what to ask your employer.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Workplace adjustments</h3><p>How to request adjustments and document needs.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Grievances & complaints</h3><p>How to write it and keep a timeline.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Redundancy basics</h3><p>Key steps, what to check, and next actions.</p><span class="arrow">Ask Charlie →</span></a>
+        </div>
+      </div>
+
+      <!-- Identity & Other Services -->
+      <div class="category-section" id="other" data-category="other">
+        <div class="category-header">
+          <div class="category-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path></svg>
+          </div>
+          <h2>Identity & Other</h2>
+          <span class="count">4 services</span>
+        </div>
+        <div class="services-grid">
+          <a href="/chat.html" class="service-card"><h3>Proof of ID & address</h3><p>Common documents and how to prepare clean scans.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>NHS basics / GP registration</h3><p>How registration usually works and what to bring.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Letters & formal complaints</h3><p>Clear, firm wording — with dates and evidence.</p><span class="arrow">Ask Charlie →</span></a>
+          <a href="/chat.html" class="service-card"><h3>Finding the right next step</h3><p>If you're unsure what you need, Charlie helps you choose.</p><span class="arrow">Ask Charlie →</span></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Not Sure Where to Start?</h2>
+    <p>Chat with Charlie and he'll help you find exactly what you need.</p>
+    <a href="/chat.html" class="btn-primary">Chat with Charlie</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Start Right UK (Mankind Reuse Limited, Company No. 16501031). All rights reserved.</p>
+    <p style="margin-top: 8px;"><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/disclaimer.html">Disclaimer</a></p>
+  </footer>
+
+  <script>
+    function showCategory(category, btn) {
+      // Update active button
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Show/hide sections
+      document.querySelectorAll('.category-section').forEach(section => {
+        if (category === 'all' || section.dataset.category === category) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+    }
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const term = this.value.toLowerCase();
+      document.querySelectorAll('.service-card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(term) ? 'block' : 'none';
+      });
+
+      // Show all categories when searching
+      if (term) {
+        document.querySelectorAll('.category-section').forEach(section => {
+          section.style.display = 'block';
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

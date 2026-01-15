@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat with Charlie | Start Right UK</title>
+  <link rel="icon" href="/charlie.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a1628;
+      --bg-light: #f8f6f1;
+      --navy: #1e3a5f;
+      --navy-light: #2d4a6f;
+      --gold: #d4a853;
+      --gold-light: #e8c478;
+      --cream: #fdfbf7;
+      --text-dark: #1a1a2e;
+      --text-light: #f8fafc;
+      --text-muted: #64748b;
+      --accent: #c9a227;
+      --success: #10b981;
+      --border: rgba(255,255,255,0.1);
+      --shadow: 0 4px 24px rgba(0,0,0,0.12);
+      --radius: 16px;
+      --radius-lg: 24px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--navy) 100%);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span {
+      color: var(--gold);
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .header-nav a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .header-nav a:hover {
+      color: white;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg-dark);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--navy) 100%);
+      padding: 40px 40px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      position: relative;
+    }
+
+    .hero-charlie {
+      width: 280px;
+      height: auto;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero-content {
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 24px;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .badge-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Main Layout */
+    .main-container {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      background: white;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      margin-top: -30px;
+      position: relative;
+      z-index: 10;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: var(--cream);
+      border-right: 1px solid rgba(0,0,0,0.06);
+      padding: 24px 16px;
+      overflow-y: auto;
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      padding: 0 12px;
+    }
+
+    .cat-btn {
+      width: 100%;
+      text-align: left;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+
+    .cat-btn:hover {
+      background: rgba(0,0,0,0.04);
+    }
+
+    .cat-btn.active {
+      background: var(--navy);
+      color: white;
+      box-shadow: 0 4px 12px rgba(30,58,95,0.3);
+    }
+
+    .cat-btn .count {
+      font-size: 12px;
+      opacity: 0.6;
+    }
+
+    /* Chat Area */
+    .chat-area {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 320px);
+      min-height: 500px;
+    }
+
+    .chat-header {
+      padding: 20px 32px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .chat-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      object-fit: cover;
+    }
+
+    .chat-header-info h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .chat-header-info p {
+      font-size: 13px;
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Messages */
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      background: linear-gradient(180deg, #fafafa 0%, white 100%);
+    }
+
+    .message {
+      display: flex;
+      gap: 16px;
+      max-width: 80%;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.bot {
+      align-self: flex-start;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .message-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 2px solid var(--gold);
+      object-fit: cover;
+    }
+
+    .message.user .message-avatar {
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      border-color: var(--navy);
+    }
+
+    .bubble {
+      padding: 16px 20px;
+      border-radius: 20px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .message.bot .bubble {
+      background: white;
+      border: 1px solid rgba(0,0,0,0.08);
+      color: var(--text-dark);
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .message.user .bubble {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .bubble strong {
+      color: var(--navy);
+    }
+
+    .message.user .bubble strong {
+      color: var(--gold-light);
+    }
+
+    /* Typing Indicator */
+    .typing {
+      display: none;
+      align-self: flex-start;
+      padding: 16px 24px;
+      background: white;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 20px;
+      gap: 6px;
+    }
+
+    .typing.show {
+      display: flex;
+    }
+
+    .typing span {
+      width: 8px;
+      height: 8px;
+      background: var(--navy);
+      border-radius: 50%;
+      animation: bounce 1.4s infinite;
+    }
+
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-8px); }
+    }
+
+    /* Input Area */
+    .input-area {
+      padding: 24px 32px;
+      background: white;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .input-container {
+      display: flex;
+      gap: 12px;
+      background: var(--cream);
+      border: 2px solid rgba(0,0,0,0.06);
+      border-radius: 16px;
+      padding: 8px 8px 8px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .input-container:focus-within {
+      border-color: var(--navy);
+    }
+
+    .input-container input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      color: var(--text-dark);
+    }
+
+    .input-container input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .send-btn {
+      background: var(--gold);
+      color: var(--bg-dark);
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .send-btn:hover {
+      background: var(--gold-light);
+      transform: scale(1.02);
+    }
+
+    .input-footer {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .quick-btn {
+      background: rgba(30,58,95,0.08);
+      border: 1px solid rgba(30,58,95,0.15);
+      color: var(--navy);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quick-btn:hover {
+      background: var(--navy);
+      color: white;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
+      .main-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        display: none;
+      }
+      
+      .hero {
+        flex-direction: column;
+        padding: 30px 20px 50px;
+        gap: 30px;
+      }
+      
+      .hero-charlie {
+        width: 180px;
+      }
+      
+      .hero-title {
+        font-size: 1.8rem;
+      }
+      
+      .header-nav {
+        display: none;
+      }
+      
+      .messages {
+        padding: 20px;
+      }
+      
+      .input-area {
+        padding: 16px 20px;
+      }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.15);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0,0,0,0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">
+        <span class="logo-text">Start <span>Right</span>®</span>
+      </a>
+      <nav class="header-nav">
+        <a href="/">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/about.html">About</a>
+        <a href="/chat.html" class="btn-primary">Chat with Charlie</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img src="/charlie.png" alt="Charlie - Your AI Assistant" class="hero-charlie">
+    <div class="hero-content">
+      <h1 class="hero-title">Chat with Charlie</h1>
+      <p class="hero-subtitle">Expert guidance on 68 UK government services, in plain English</p>
+      <div class="hero-badges">
+        <div class="badge">
+          <svg class="badge-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          Companies House Agent
+        </div>
+        <div class="badge">
+          <svg class="badge-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+          4.9/5 on Trustpilot
+        </div>
+        <div class="badge">
+          <svg class="badge-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          Money Back Guarantee
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Service Categories</div>
+      <div id="catSidebar"></div>
+    </aside>
+
+    <!-- Chat Area -->
+    <main class="chat-area">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <img src="/charlie.png" alt="Charlie" class="chat-avatar">
+          <div class="chat-header-info">
+            <h2>Charlie</h2>
+            <p><span class="status-dot"></span> Online & Ready to Help</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="messages" id="messages">
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <button class="quick-btn" onclick="quickQuestion('I want to start a business')">Start a Business</button>
+          <button class="quick-btn" onclick="quickQuestion('I need help with PIP')">PIP Help</button>
+          <button class="quick-btn" onclick="quickQuestion('Universal Credit question')">Universal Credit</button>
+          <button class="quick-btn" onclick="quickQuestion('Housing support')">Housing</button>
+          <button class="quick-btn" onclick="quickQuestion('Tax and HMRC')">Tax & HMRC</button>
+        </div>
+      </div>
+
+      <div class="typing" id="typing">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="input-area">
+        <div class="input-container">
+          <input type="text" id="chatInput" placeholder="Ask Charlie anything about benefits, business, housing..." autocomplete="off">
+          <button class="send-btn" id="sendBtn">Send</button>
+        </div>
+        <p class="input-footer">© 2026 Start Right UK (Mankind Reuse Limited). Charlie explains processes in plain English. We do not provide regulated legal or tax advice.</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Service categories with counts
+    const CATEGORIES = [
+      { name: 'All Services', count: 68 },
+      { name: 'Business', count: 15 },
+      { name: 'Benefits', count: 15 },
+      { name: 'Housing', count: 10 },
+      { name: 'HMRC & Tax', count: 8 },
+      { name: 'Student Finance', count: 6 },
+      { name: 'DVLA & Transport', count: 5 },
+      { name: 'Work & Employment', count: 5 },
+      { name: 'Identity & Other', count: 4 }
+    ];
+
+    // DOM Elements
+    const catSidebar = document.getElementById('catSidebar');
+    const messagesDiv = document.getElementById('messages');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const typingDiv = document.getElementById('typing');
+
+    // Conversation history for API
+    let conversationHistory = [];
+
+    // Render category sidebar
+    CATEGORIES.forEach((cat, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'cat-btn' + (index === 0 ? ' active' : '');
+      btn.innerHTML = `<span>${cat.name}</span><span class="count">${cat.count}</span>`;
+      btn.onclick = () => {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        quickQuestion(`Tell me about your ${cat.name} services`);
+      };
+      catSidebar.appendChild(btn);
+    });
+
+    // Add message to chat
+    function addMessage(text, isBot) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'message ' + (isBot ? 'bot' : 'user');
+
+      if (isBot) {
+        const formattedText = text
+          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+          .replace(/\n/g, '<br>');
+        
+        msgDiv.innerHTML = `
+          <img src="/charlie.png" alt="Charlie" class="message-avatar">
+          <div class="bubble">${formattedText}</div>
+        `;
+      } else {
+        msgDiv.innerHTML = `
+          <div class="message-avatar">You</div>
+          <div class="bubble">${text}</div>
+        `;
+      }
+
+      messagesDiv.appendChild(msgDiv);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    // Show/hide typing indicator
+    function showTyping(show) {
+      typingDiv.className = 'typing' + (show ? ' show' : '');
+      if (show) {
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+    }
+
+    // Send message to API
+    async function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      addMessage(text, false);
+      chatInput.value = '';
+
+      conversationHistory.push({
+        role: 'user',
+        content: text
+      });
+
+      showTyping(true);
+
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: conversationHistory })
+        });
+
+        const data = await response.json();
+        showTyping(false);
+
+        if (data.reply) {
+          conversationHistory.push({
+            role: 'assistant',
+            content: data.reply
+          });
+          addMessage(data.reply, true);
+        } else if (data.error) {
+          let errorMsg = 'Sorry, something went wrong';
+          if (data.details && data.details.message) {
+            errorMsg += ': ' + data.details.message;
+          }
+          addMessage(errorMsg + '. Please try again or email info@start-right.uk 💚', true);
+        } else {
+          addMessage('Sorry, I had trouble there. Please try again or email info@start-right.uk 💚', true);
+        }
+
+      } catch (error) {
+        showTyping(false);
+        addMessage('Connection error. Please check your internet and try again, or email info@start-right.uk 💚', true);
+      }
+    }
+
+    // Quick question buttons
+    function quickQuestion(text) {
+      chatInput.value = text;
+      sendMessage();
+    }
+
+    // Event listeners
+    sendBtn.onclick = sendMessage;
+    chatInput.onkeydown = (e) => { if (e.key === 'Enter') sendMessage(); };
+
+    // Welcome message
+    addMessage("Hey there! 👋 I'm **Charlie**, your personal guide to UK government services.\n\nI can help you with **68 different services** including starting a business, applying for benefits like PIP and Universal Credit, housing support, tax questions, and much more.\n\nEverything explained in plain English, no jargon, no judgment.\n\n**What's your name?**", true);
+  </script>
+
+</body>
+</html>
